@@ -12,7 +12,9 @@
     "router": "^1.1.4",
     "send": "^0.13.2",
     "serve-static": "^1.10.2",
-    "finalhandler": "^0.4.1"
+    "finalhandler": "^0.4.1",
+    "express": "^4.13.4",
+    "simple-websocket": "^2.0.0"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
