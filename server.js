@@ -33,7 +33,7 @@ function notify() {
 	for(c in requestRegister) 
 		requestRegister[c].sendUTF(number.toString());
 	    console.log((new Date()) + ' Server Send: ' + number.toString());
-	    setTimeout(sendNumber, 1000);
+	    setTimeout(notify, 1000);
 }
 notify();
 
