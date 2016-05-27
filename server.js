@@ -42,10 +42,10 @@ wsServer.on('request', function(request) {
               console.log((new Date()) + ' Server Send: ' + number.toString());
               setTimeout(sendNumber, 1000);
     }
-
-    connection.on('message', function (message) {
-        sendNumber();
-      });
+    sendNumber();
+//    connection.on('message', function (message) {
+//        sendNumber();
+//      });
 
 //    connection.on('message', function(message) {
 //        sendNumber();
