@@ -47,7 +47,7 @@ wsServer.on('request', function(request) {
     var connection = request.accept('echo-protocol', request.origin);
     console.log((new Date()) + ' Connection accepted.');
 
-    requestRegister.push(request);
+    requestRegister.push(connection);
 
     connection.on('close', function(reasonCode, description) {
         console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
