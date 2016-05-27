@@ -47,5 +47,13 @@ wsServer.on('request', function(request) {
     });
     connection.on('close', function(reasonCode, description) {
         console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
+        function sendNumber() {
+            if (connection.connected) {
+                var number = Math.round(Math.random() * 0xFFFFFF);
+                connection.sendUTF(number.toString());
+                setTimeout(sendNumber, 1000);
+            }
+        }
+        sendNumber();
     });
 });
