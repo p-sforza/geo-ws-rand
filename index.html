@@ -22,5 +22,22 @@
         </footer>
 
 </section>
+<div id="content"></div>
+
+<script type="text/javascript">
+    var content = document.getElementById('content');
+    var socket = new WebSocket('ws://geovisualizer.1ec1.dev-preview-int.openshiftapps.com:8080');
+    socket.onopen = function () {
+        socket.send('hello from the client');
+    };
+
+    socket.onmessage = function (message) {
+        content.innerHTML += message.data +'<br />';
+    };
+
+    socket.onerror = function (error) {
+        console.log('WebSocket error: ' + error);
+    };
+</script>
 </body>
 </html>
