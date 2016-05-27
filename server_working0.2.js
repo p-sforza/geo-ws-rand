@@ -26,15 +26,7 @@ function originIsAllowed(origin) {
 }
 
 //New connection handling
-var requestRegister = [ ];
-
-var notify = function(req, res) {
-	var number = Math.round(Math.random() * 0x64);
-	for(c in requestRegister) 
-		requestRegister[c].sendUTF(number.toString());
-	    console.log((new Date()) + ' Server Send: ' + number.toString());
-	    setTimeout(sendNumber, 1000);
-}
+var adminWS = [ ];
 
 wsServer.on('request', function(request) {
     if (!originIsAllowed(request.origin)) {
@@ -43,11 +35,32 @@ wsServer.on('request', function(request) {
       console.log((new Date()) + ' Connection from origin ' + request.origin + ' rejected.');
       return;
     }
+
     var connection = request.accept('echo-protocol', request.origin);
     console.log((new Date()) + ' Connection accepted.');
+    
+    function sendNumber() {
+        var number = Math.round(Math.random() * 0x64);
+              connection.sendUTF(number.toString());
+              console.log((new Date()) + ' Server Send: ' + number.toString());
+              setTimeout(sendNumber, 1000);
+    }
+    sendNumber();
+//    connection.on('message', function (message) {
+//        sendNumber();
+//      });
 
-    requestRegister.push(request);
-
+//    connection.on('message', function(message) {
+//        sendNumber();
+//        if (message.type === 'utf8') {
+//            console.log('Received Message: ' + message.utf8Data);
+//            connection.sendUTF(message.utf8Data);
+//        }
+//        else if (message.type === 'binary') {
+//            console.log('Received Binary Message of ' + message.binaryData.length + ' bytes');
+//            connection.sendBytes(message.binaryData);
+//        }
+//    });
     connection.on('close', function(reasonCode, description) {
         console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
     });
