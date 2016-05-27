@@ -35,26 +35,28 @@ wsServer.on('request', function(request) {
 
     var connection = request.accept('echo-protocol', request.origin);
     console.log((new Date()) + ' Connection accepted.');
-
+    
     function sendNumber() {
         var number = Math.round(Math.random() * 0x64);
               connection.sendUTF(number.toString());
               setTimeout(sendNumber, 1000);
     }
-    
-    connection.on(function sendNumber());
-    
-    connection.on('message', function(message) {
+
+    connection.on(function () {
         sendNumber();
-        if (message.type === 'utf8') {
-            console.log('Received Message: ' + message.utf8Data);
-            connection.sendUTF(message.utf8Data);
-        }
-        else if (message.type === 'binary') {
-            console.log('Received Binary Message of ' + message.binaryData.length + ' bytes');
-            connection.sendBytes(message.binaryData);
-        }
-    });
+      });
+
+//    connection.on('message', function(message) {
+//        sendNumber();
+//        if (message.type === 'utf8') {
+//            console.log('Received Message: ' + message.utf8Data);
+//            connection.sendUTF(message.utf8Data);
+//        }
+//        else if (message.type === 'binary') {
+//            console.log('Received Binary Message of ' + message.binaryData.length + ' bytes');
+//            connection.sendBytes(message.binaryData);
+//        }
+//    });
     connection.on('close', function(reasonCode, description) {
         console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
     });
