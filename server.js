@@ -39,6 +39,7 @@ wsServer.on('request', function(request) {
     function sendNumber() {
         var number = Math.round(Math.random() * 0x64);
               connection.sendUTF(number.toString());
+              console.log((new Date()) + ' Server Send: ' + number.toString());
               setTimeout(sendNumber, 1000);
     }
 
