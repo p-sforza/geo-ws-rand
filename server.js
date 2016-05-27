@@ -32,17 +32,19 @@ wsServer.on('request', function(request) {
       console.log((new Date()) + ' Connection from origin ' + request.origin + ' rejected.');
       return;
     }
- 
+
     var connection = request.accept('echo-protocol', request.origin);
     console.log((new Date()) + ' Connection accepted.');
+
+    function sendNumber() {
+        var number = Math.round(Math.random() * 0x64);
+              connection.sendUTF(number.toString());
+              setTimeout(sendNumber, 1000);
+    }
+    
+    connection.on(sendNumber());
+    
     connection.on('message', function(message) {
-        function sendNumber() {
-//            if (connection.connected) {
-                var number = Math.round(Math.random() * 0x64);
-                connection.sendUTF(number.toString());
-                setTimeout(sendNumber, 1000);
-//            }
-        }
         sendNumber();
         if (message.type === 'utf8') {
             console.log('Received Message: ' + message.utf8Data);
