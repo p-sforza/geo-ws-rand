@@ -5,7 +5,8 @@ var cc              = require('config-multipaas'),
     fs              = require('fs'),
     serveStatic     = require("serve-static"),
     express         = require('express'),
-    SimpleWebsocket = require('simple-websocket');
+    SimpleWebsocket = require('simple-websocket'),
+    WebSocketServer = require('ws').Server;
  
 var config   = cc();
 var app      = Router()
@@ -39,13 +40,27 @@ server.listen(config.get('PORT'), config.get('IP'), function () {
   console.log( "Listening on " + config.get('IP') + ", port " + config.get('PORT') )
 });
 
-// WebSocket
+// WebSocket client
 var socket = new SimpleWebsocket('ws://echo.websocket.org')
 socket.on('connect', function () {
-  // socket is connected! 
   socket.send('sup!')
 })
  
 socket.on('data', function (data) {
   console.log('got message: ' + data)
+});
+
+//WebSocket server
+var adminWS = [ ];
+var notify = function(req, res) {
+	  for(c in adminWS)
+	    adminWS.send(JSON.stringify({
+	      ip: req.connection.remoteAddress,
+	      userAgent: req.headers['user-agent'],
+	      time: (new Date()).getTime()
+	    }));
+	};
+var wss = new WebSocketServer({server:server});
+wss.on('connection', function(ws) {
+    adminWS.push(ws);
 });
