@@ -42,7 +42,7 @@ wsServer.on('request', function(request) {
               setTimeout(sendNumber, 1000);
     }
 
-    connection.on(function () {
+    connection.on('message', function (message) {
         sendNumber();
       });
 
