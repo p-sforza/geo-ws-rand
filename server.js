@@ -37,11 +37,11 @@ wsServer.on('request', function(request) {
     console.log((new Date()) + ' Connection accepted.');
     connection.on('message', function(message) {
         function sendNumber() {
-            if (connection.connected) {
+//            if (connection.connected) {
                 var number = Math.round(Math.random() * 0x64);
                 connection.sendUTF(number.toString());
                 setTimeout(sendNumber, 1000);
-            }
+//            }
         }
         sendNumber();
         if (message.type === 'utf8') {
