@@ -15,6 +15,7 @@
     "finalhandler": "^0.4.1",
     "express": "^4.13.4",
     "simple-websocket": "^2.0.0"
+    "websocket":"^1.0.23"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
