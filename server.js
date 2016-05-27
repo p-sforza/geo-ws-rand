@@ -41,26 +41,24 @@ server.listen(config.get('PORT'), config.get('IP'), function () {
 });
 
 // WebSocket client
-var socket = new SimpleWebsocket('ws://echo.websocket.org')
-socket.on('connect', function () {
-  socket.send('sup!')
-})
- 
-socket.on('data', function (data) {
-  console.log('got message: ' + data)
-});
+//var socket = new SimpleWebsocket('ws://echo.websocket.org')
+//socket.on('connect', function () {
+//  socket.send('sup!')
+//})
+// 
+//socket.on('data', function (data) {
+//  console.log('got message: ' + data)
+//});
 
 //WebSocket server
-var adminWS = [ ];
-var notify = function(req, res) {
-	  for(c in adminWS)
-	    adminWS.send(JSON.stringify({
-	      ip: req.connection.remoteAddress,
-	      userAgent: req.headers['user-agent'],
-	      time: (new Date()).getTime()
-	    }));
-	};
 var wss = new WebSocketServer({server:server});
+
 wss.on('connection', function(ws) {
-    adminWS.push(ws);
+    console.log(connection.utf8Data);
+    connection.sendUTF('hello from server');
+    setTimeout(function() {
+        connection.sendUTF('this is a websocket example');
+    }, 1000);
+    
 });
+
