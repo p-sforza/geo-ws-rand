@@ -28,13 +28,14 @@ function originIsAllowed(origin) {
 //New connection handling
 var requestRegister = [ ];
 
-var notify = function(req, res) {
+function notify() {
 	var number = Math.round(Math.random() * 0x64);
 	for(c in requestRegister) 
 		requestRegister[c].sendUTF(number.toString());
 	    console.log((new Date()) + ' Server Send: ' + number.toString());
 	    setTimeout(sendNumber, 1000);
 }
+notify();
 
 wsServer.on('request', function(request) {
     if (!originIsAllowed(request.origin)) {
