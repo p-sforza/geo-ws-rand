@@ -32,7 +32,7 @@ function notify() {
 	var number = Math.round(Math.random() * 0x64);
 	for(c in requestRegister) 
 		requestRegister[c].send(number.toString());
-	    console.log((new Date()) + ' Server Send: ' + number.toString());
+	    //console.log((new Date()) + ' Server Send: ' + number.toString());
 	    setTimeout(notify, 1000);
 }
 notify();
