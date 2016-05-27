@@ -26,7 +26,7 @@ function originIsAllowed(origin) {
 }
 
 //New connection handling
-var requestRegister = [ ];
+requestRegister = [ ];
 
 function notify() {
 	var number = Math.round(Math.random() * 0x64);
@@ -50,6 +50,7 @@ wsServer.on('request', function(request) {
     requestRegister.push(connection);
 
     connection.on('close', function(reasonCode, description) {
+    	requestRegister = [ ];
         console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
     });
 });
