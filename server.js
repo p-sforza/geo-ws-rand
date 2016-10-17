@@ -29,14 +29,15 @@ function notify() {
 	var sales = [];
 	
 	sales.push ({
-        id: countryCode.toString(),
-        value: saleValue.toString()
+        "cc": countryCode.toString(),
+        "value": saleValue.toString()
     });
 	
 	for(c in requestRegister) 
 		requestRegister[c].send(sales.toString());
+        //console.log((new Date()) + ' Server Send: ' + countryCode.toString());
+        console.log((new Date()) + ' Server Send: ' + sales.toString());
         //Introduce a rand delay
-	    //console.log((new Date()) + ' Server Send: ' + countryCode.toString());
 	    setTimeout(notify, delay);
 }
 notify();
