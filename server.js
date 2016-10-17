@@ -39,7 +39,8 @@ function notify() {
         //console.log((new Date()) + ' Server Send: ' + countryCode.toString());
         //console.log((new Date()) + ' Server Send: ' + JSON.parse(JSON.stringify(sales)));
         //Introduce a rand delay
-		requestRegister[c].send(sales);
+        var message = JSON.stringify(sales);
+		requestRegister[c].send(message);
 	    setTimeout(notify, delay);
 }
 notify();
