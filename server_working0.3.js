@@ -12,10 +12,16 @@ server.listen(8080, function() {
 
 wsServer = new WebSocketServer({
     httpServer: server,
+    // You should not use autoAcceptConnections for production
+    // applications, as it defeats all standard cross-origin protection
+    // facilities built into the protocol and the browser.  You should
+    // *always* verify the connection's origin and decide whether or not
+    // to accept it.
     autoAcceptConnections: false
 });
 
 function originIsAllowed(origin) {
+  // put logic here to detect whether the specified origin is allowed.
   return true;
 }
 
@@ -24,11 +30,10 @@ requestRegister = [ ];
 
 function notify() {
 	var number = Math.round(Math.random() * 0x64);
-	var delay  = Math.round((Math.random() * 2) + 2)*1000;
 	for(c in requestRegister) 
 		requestRegister[c].send(number.toString());
 	    //console.log((new Date()) + ' Server Send: ' + number.toString());
-	    setTimeout(notify, delay);
+	    setTimeout(notify, 1000);
 }
 notify();
  
