@@ -23,11 +23,20 @@ function originIsAllowed(origin) {
 requestRegister = [ ];
 
 function notify() {
-	var number = Math.round(Math.random() * 0x64);
-	var delay  = Math.round((Math.random() * 2) + 2)*1000;
+	var countryCode = Math.round(Math.random() * 0x64);
+	var delay       = Math.round((Math.random() * 2) + 2)*1000;
+	var saleValue   = Math.round((Math.random() * 1000) + 1);
+	var sales = [];
+	
+	sales.push ({
+        id: countryCode.toString(),
+        value: saleValue.toString()
+    });
+	
 	for(c in requestRegister) 
-		requestRegister[c].send(number.toString());
-	    //console.log((new Date()) + ' Server Send: ' + number.toString());
+		requestRegister[c].send(sales.toString());
+        //Introduce a rand delay
+	    //console.log((new Date()) + ' Server Send: ' + countryCode.toString());
 	    setTimeout(notify, delay);
 }
 notify();
