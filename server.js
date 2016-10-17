@@ -26,7 +26,7 @@ function notify() {
 	var countryCode = Math.round(Math.random() * 0x64);
 	var delay       = Math.round((Math.random() * 2) + 2)*1000;
 	var saleValue   = Math.round((Math.random() * 1000) + 1);
-	var sales = [];
+	var sales       = [];
 	
 	sales.push ({
         "cc": countryCode.toString(),
@@ -35,10 +35,11 @@ function notify() {
 	console.log((new Date()) + ' Object: ' + JSON.stringify(sales));
 	
 	for(c in requestRegister) 
-		requestRegister[c].send(sales.toString());
+		//requestRegister[c].send(sales.toString());
         //console.log((new Date()) + ' Server Send: ' + countryCode.toString());
         //console.log((new Date()) + ' Server Send: ' + JSON.parse(JSON.stringify(sales)));
         //Introduce a rand delay
+		requestRegister[c].send(sales);
 	    setTimeout(notify, delay);
 }
 notify();
