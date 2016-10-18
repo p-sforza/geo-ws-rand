@@ -24,12 +24,14 @@ requestRegister = [ ];
 
 function notify() {
 	var countryCode = Math.round(Math.random() * 0x64);
+    var countryColor = "#24179E";
 	var delay       = Math.round((Math.random() * 2) + 2)*1000;
 	var saleValue   = Math.round((Math.random() * 1000) + 1);
 	var sales       = [];
 	
 	sales.push ({
         "cc": countryCode.toString(),
+        "countryColor": countryColor,
         "value": saleValue.toString()
     });
 	console.log((new Date()) + ' Object: ' + JSON.stringify(sales));
