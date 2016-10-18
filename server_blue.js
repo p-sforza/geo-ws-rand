@@ -24,8 +24,8 @@ requestRegister = [ ];
 
 function notify() {
 	var countryCode = Math.round(Math.random() * 0x64);
-	//var countryColor = "#24179E"; // Country in blue
- 	var countryColor = "#f00"; // Country in red!
+	var countryColor = "#24179E"; // Country in blue
+ 	//var countryColor = "#f00"; // Country in red!
 	var delay       = Math.round((Math.random() * 2) + 2)*1000;
 	var saleValue   = Math.round((Math.random() * 1000) + 1);
 	var sales       = [];
