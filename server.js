@@ -39,9 +39,9 @@ function notify() {
 	console.log((new Date()) + ' Object: ' + JSON.stringify(sales));
 	
 	for(c in requestRegister) 
-        console.log((new Date()) + ' Sending message @ ' + connection.remoteAddress);
-	    requestRegister[c].send(JSON.stringify(sales));
-        //console.log((new Date()) + ' Server Send: ' + countryCode.toString());
+        requestRegister[c].send(JSON.stringify(sales));
+	    console.log((new Date()) + ' Sending message @ ' + connection.remoteAddress);
+	    //console.log((new Date()) + ' Server Send: ' + countryCode.toString());
         //console.log((new Date()) + ' Server Send: ' + JSON.parse(JSON.stringify(sales)));
         //Introduce a rand delay
 	    setTimeout(notify, delay);
