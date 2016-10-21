@@ -1,5 +1,6 @@
 var WebSocketServer = require('websocket').server;
 var http = require('http');
+const util = require('util');
 
 var server = http.createServer(function(request, response) {
     console.log((new Date()) + ' Received request for ' + request.url);
@@ -58,10 +59,10 @@ wsServer.on('request', function(request) {
     console.log((new Date()) + ' Connection accepted.');
 
     requestRegister.push(connection);
-    console.log("Connection register (on request): " + JSON.stringify(requestRegister));
+    console.log("Connection register (on request): " + util.inspect(requestRegister, false, null));
 
     connection.on('close', function(reasonCode, description) {
-        console.log("Connection register (on close): " + JSON.stringify(requestRegister));
+        console.log("Connection register (on close): " + util.inspect(requestRegister, false, null));
     	requestRegister = [ ];
         console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
     });
