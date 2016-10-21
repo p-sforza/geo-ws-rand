@@ -58,7 +58,8 @@ wsServer.on('request', function(request) {
 
     connection.on('close', function(reasonCode, description) {
         console.log("Connection on close: " + connection.remoteAddress);
-    	requestRegister = [ ];
+        //Try to solve bug on disconnection
+        //requestRegister = [ ];
         console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
     });
 });
