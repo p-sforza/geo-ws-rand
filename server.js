@@ -35,11 +35,10 @@ function notify() {
         "countryColor": countryColor,
         "value": saleValue.toString()
     });
-	//console.log((new Date()) + 'Sending message: ' + JSON.stringify(sales));
+	console.log((new Date()) + ' Object: ' + JSON.stringify(sales));
 	
 	for(c in requestRegister) 
 		//requestRegister[c].send(sales.toString());
-		console.log("Sending message to those conn: " + JSON.stringify(requestRegister));
 	    requestRegister[c].send(JSON.stringify(sales));
         //console.log((new Date()) + ' Server Send: ' + countryCode.toString());
         //console.log((new Date()) + ' Server Send: ' + JSON.parse(JSON.stringify(sales)));
