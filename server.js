@@ -58,8 +58,10 @@ wsServer.on('request', function(request) {
     console.log((new Date()) + ' Connection accepted.');
 
     requestRegister.push(connection);
+    console.log("Connection register: " + requestRegister);
 
     connection.on('close', function(reasonCode, description) {
+        console.log("Connection register (on close): " + requestRegister);
     	requestRegister = [ ];
         console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
     });
