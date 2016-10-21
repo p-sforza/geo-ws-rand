@@ -35,10 +35,11 @@ function notify() {
         "countryColor": countryColor,
         "value": saleValue.toString()
     });
-	console.log((new Date()) + ' Object: ' + JSON.stringify(sales));
+	//console.log((new Date()) + 'Sending message: ' + JSON.stringify(sales));
 	
 	for(c in requestRegister) 
 		//requestRegister[c].send(sales.toString());
+		console.log("Sending message to those conn: " + JSON.stringify(requestRegister));
 	    requestRegister[c].send(JSON.stringify(sales));
         //console.log((new Date()) + ' Server Send: ' + countryCode.toString());
         //console.log((new Date()) + ' Server Send: ' + JSON.parse(JSON.stringify(sales)));
@@ -58,10 +59,10 @@ wsServer.on('request', function(request) {
     console.log((new Date()) + ' Connection accepted.');
 
     requestRegister.push(connection);
-    console.log("Connection register: " + requestRegister);
+    console.log("Connection register (on request): " + JSON.stringify(requestRegister));
 
     connection.on('close', function(reasonCode, description) {
-        console.log("Connection register (on close): " + requestRegister);
+        console.log("Connection register (on close): " + JSON.stringify(requestRegister));
     	requestRegister = [ ];
         console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
     });
