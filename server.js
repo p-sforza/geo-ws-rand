@@ -40,18 +40,13 @@ function notify() {
 	
 	for(c in requestRegister) 
         requestRegister[c].send(JSON.stringify(sales));
-	    console.log((new Date()) + ' Sending message @ ' + connection.remoteAddress);
-	    //console.log((new Date()) + ' Server Send: ' + countryCode.toString());
-        //console.log((new Date()) + ' Server Send: ' + JSON.parse(JSON.stringify(sales)));
-        //Introduce a rand delay
-	    setTimeout(notify, delay);
+	    setTimeout(notify, delay); //Introduce a rand delay
 }
 notify();
  
 wsServer.on('request', function(request) {
     if (!originIsAllowed(request.origin)) {
-      // Make sure we only accept requests from an allowed origin
-      request.reject();
+      request.reject();  // Make sure we only accept requests from an allowed origin
       console.log((new Date()) + ' Connection from origin ' + request.origin + ' rejected.');
       return;
     }
