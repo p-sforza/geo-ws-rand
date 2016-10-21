@@ -39,7 +39,7 @@ function notify() {
 	console.log((new Date()) + ' Object: ' + JSON.stringify(sales));
 	
 	for(c in requestRegister) 
-		//requestRegister[c].send(sales.toString());
+        console.log((new Date()) + ' Sending message @ ' + connection.remoteAddress);
 	    requestRegister[c].send(JSON.stringify(sales));
         //console.log((new Date()) + ' Server Send: ' + countryCode.toString());
         //console.log((new Date()) + ' Server Send: ' + JSON.parse(JSON.stringify(sales)));
@@ -59,10 +59,10 @@ wsServer.on('request', function(request) {
     console.log((new Date()) + ' Connection accepted.');
 
     requestRegister.push(connection);
-    console.log("Connection register (on request): " + util.inspect(requestRegister.remoteAddresses, false, null));
+    console.log("Connection on request: " + connection.remoteAddress);
 
     connection.on('close', function(reasonCode, description) {
-        console.log("Connection register (on close): " + util.inspect(requestRegister.remoteAddresses, false, null));
+        console.log("Connection on close: " + connection.remoteAddress);
     	requestRegister = [ ];
         console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
     });
